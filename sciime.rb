@@ -9,9 +9,11 @@ class Sciime < Sinatra::Base
 
   get '/widget-list' do
     namespaces = Dir['public/widgets/*.html'].map do |file|
+      filename = File.basename(file, '.html')
+
       {
-        filename: file,
-        namespace: File.basename(file, '.html').underscore.camelize
+        filename: filename,
+        namespace: filename.underscore.camelize
       }
     end
 
