@@ -7,7 +7,7 @@
 
     configuration: {
       timeout: 4000,
-      list_file: '/widget-list',
+      list_url: '/widget-list',
       replacements: {
         content: '#widget-content',
         title: '#widget-title',
@@ -33,14 +33,14 @@
 
         widget_count++;
         widget_count = widget_count % self.widget_list.length
-      }, this.configuration.timeout)
+      }, self.configuration.timeout)
     },
 
     load_widget_list: function() {
       var self = this;
 
       $.ajax({
-        url: this.configuration.list_file,
+        url: self.configuration.list_url,
         async: false
       }).done(function(data) {
         self.widget_list = jQuery.parseJSON(data);
