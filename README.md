@@ -1,4 +1,4 @@
-# sciime
+# sciime ['ski:m]
 
 Your favorite dashboard!
 
