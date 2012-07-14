@@ -2,109 +2,157 @@
 
   Sciime = {
     configuration: {
-      slide_interval: 2000,
-      list_url: '/widget-list'
-    },
-
-    widget_configuration : {
-
+      interval: 2000,
+      listUrl: '/widget-list'
     },
 
     init: function() {
       var self = this;
-      $('body').bind('widgets_loaded', function(event, widget_list) {
-        self.add_widgets(widget_list);
+
+      $('body').bind('widgets_loaded', function(event, widgetList) {
+        self.addWidgets(widgetList);
       });
 
-      self.load_widget_list();
+      self.loadWidgetList();
     },
 
-    add_widgets: function(widget_list) {
+    addWidgets: function(widgetList) {
       var self = this;
       var index = 0;
-      widget_list.forEach(function(widget_data) {
-        self.render_widget(widget_data).done(function() {
-          if ($('.carousel').find('.item').length === widget_list.length) {
-            self.init_widgets();
+
+      widgetList.forEach(function(widgetData) {
+        self.renderWidget(widgetData).done(function() {
+          if (self.carouselLength() === widgetList.length) {
+            self.initWidgets();
           }
-          eval(widget_data.namespace).configuration.index = index;
-          self.render_widget_navigation(widget_data);
+
+          self.widgetConfiguration(widgetData.namespace).index = index;
+          self.addNavigationItem(widgetData.namespace);
+
           index++;
         });
       });
     },
 
-    render_widget_navigation: function(widget_data) {
-      var widget_data = eval(widget_data.namespace).configuration;
-      var widget_title = widget_data.title;
-      var item = $('<li>').data('widget-index', widget_data.index).append($('<a>').attr('href', '#').text(widget_title));
+    addNavigationItem: function(widgetName) {
+      var self = this;
 
-      item.find('a').click(function(event) {
+      var configuration = self.widgetConfiguration(widgetName);
+
+      var link = $('<a>').attr('href', '#').text(configuration.linkTitle);
+      var item = $('<li>').data('widget-index', configuration.index).append(link);
+
+      link.click(function(event) {
+        event.preventDefault();
+
         var parent = $(this).parent('li');
-        parent.addClass('active').siblings().removeClass('active');
-        var slide_number = item.data('widget-index');
-        $('.carousel').carousel('pause').carousel(slide_number);
+        self.activateLink(parent);
+
+        self.carouselPause();
+        self.carouselAt(configuration.index);
       });
 
       $('#widget-navigation').append(item);
     },
 
-    render_widget: function(widget_data) {
+    activateLink: function(element) {
+      element.addClass('active');
+      element.siblings().removeClass('active');
+    },
+
+    carouselPause: function() {
+      return $('.carousel').carousel('pause');
+    },
+
+    carouselAt: function(index) {
+      return $('.carousel').carousel(index)
+    },
+
+    carouselLength: function(index) {
+      return $('.carousel').find('.item').length;
+    },
+
+    carouselAddSlide: function(slide) {
+      var carousel = $('.carousel-inner');
+
+      carousel.append(slide);
+    },
+
+    widgetConfiguration: function(name) {
+      return eval(name).configuration;
+    },
+
+    renderWidget: function(widgetData) {
       var self = this;
-      return self.load_widget(widget_data.filename).done(function(widget_html) {
+
+      return self.load_widget(widgetData.filename).done(function(content) {
         var item = $('<div>').addClass('item');
-        var widget_header = $('<div>').addClass('hero-unit');
-        item.append(widget_html);
+        var header = $('<div>').addClass('hero-unit');
+        var title = $('<h1>');
+        var description = $('<p>');
 
-        var carousel = $('.carousel-inner');
-        carousel.append(item);
+        header.append(title);
+        header.append(description);
+        item.append(header);
+        item.append(content);
 
-        var widget_configuration = eval(widget_data.namespace).configuration;
-        widget_configuration.filename = widget_data.filename;
-        widget_configuration.namespace = widget_data.namespace;
+        var configuration = self.widgetConfiguration(widgetData.namespace);
+        configuration.filename = widgetData.filename;
+        configuration.namespace = widgetData.namespace;
 
-        var widget_title = $('<h1>').text(widget_configuration.title);
-        var widget_subtitle = $('<p>').text(widget_configuration.subtitle);
+        title.text(configuration.title);
+        description.text(configuration.description);
+        item.data('widget', configuration);
 
-        widget_header.append(widget_title);
-        widget_header.append(widget_subtitle);
-        item.prepend(widget_header);
-        item.data('widget', widget_configuration);
+        self.carouselAddSlide(item);
       });
     },
 
-    init_widgets: function() {
+    initWidgets: function() {
       var self = this;
+
       var carousel = $('.carousel');
-      carousel.carousel({interval: self.configuration.slide_interval});
-      var first_widget_data = carousel.find('.item:first').data('widget');
-      eval(first_widget_data.namespace).init();
+      carousel.carousel({
+        interval: self.configuration.interval
+      });
+
+      var first_widgetData = carousel.find('.item:first').data('widget');
+      self.initWidget(first_widgetData.namespace)
 
       carousel.bind('slid', function(event) {
         var current_widget = $(event.target).find('.active');
         var next_widget = current_widget.next();
-        if (next_widget.length) {
-          var widget_data = next_widget.data('widget');
-        } else {
-          var widget_data = first_widget_data;
-        }
-        eval(widget_data.namespace).init();
 
-        self.change_active_navigation(current_widget)
+        if (next_widget.length) {
+          var widgetData = next_widget.data('widget');
+        } else {
+          var widgetData = first_widgetData;
+        }
+
+        self.initWidget(widgetData.namespace);
+
+        self.changeActiveNavigation(self, current_widget)
       });
+
       $('body').trigger('widgets_initialized');
     },
 
-    change_active_navigation: function(current_widget) {
-      var slide_number = current_widget.data('widget').index;
-      $('#widget-navigation').find('li').eq(slide_number).addClass('active').siblings().removeClass('active');
+    initWidget: function(name) {
+      eval(name).init();
     },
 
-    load_widget_list: function() {
+    changeActiveNavigation: function(self, current_widget) {
+      var index = current_widget.data('widget').index;
+      var item = $('#widget-navigation').find('li').eq(index)
+
+      self.activateLink(item);
+    },
+
+    loadWidgetList: function() {
       var self = this;
 
       $.ajax({
-        url: self.configuration.list_url,
+        url: self.configuration.listUrl,
         dataType: 'json'
       }).done(function(data) {
         $('body').trigger('widgets_loaded', [data]);
