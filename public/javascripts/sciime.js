@@ -48,8 +48,17 @@
       var self = this;
       var carousel = $('.carousel');
       carousel.carousel({interval: self.configuration.slide_interval});
+      var first_widget_data = carousel.find('.item:first').data('widget');
+      eval(first_widget_data.namespace).init();
+
       carousel.bind('slid', function(event) {
-        var widget_data = $(event.target).find('.active').data('widget');
+        var next_widget = $(event.target).find('.active').next();
+        if (next_widget.length) {
+          var widget_data = next_widget.data('widget');
+        } else {
+          var widget_data = first_widget_data;
+        }
+        eval(widget_data.namespace).init();
       });
       $('body').trigger('widgets_initialized');
     },
