@@ -1,4 +1,5 @@
-sciime
-======
+# sciime
 
-Your favorite dashboard.
+Your favorite dashboard!
+
+## Changelog
