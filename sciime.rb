@@ -8,7 +8,9 @@ class Sciime < Sinatra::Base
   end
 
   get '/widget-list' do
-    Dir['public/widgets/*.html'].map { |file| File.basename(file) }.to_s
+    Dir['public/widgets/*.html'].map do |file|
+      File.basename(file, '.html').underscore.camelize
+    end
   end
 
   get '/proxy/:url' do |url|
