@@ -41,8 +41,6 @@ class Sciime < Sinatra::Base
   def get_file_content(url)
     uri = URI(url)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.open_timeout = 4
-    http.read_timeout = 4
 
     if uri.scheme == 'https'
       http.use_ssl = true

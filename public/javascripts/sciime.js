@@ -9,7 +9,7 @@
     init: function() {
       var self = this;
 
-      $('body').bind('widgets_loaded', function(event, widgetList) {
+      $('body').bind('widgetsLoaded', function(event, widgetList) {
         self.addWidgets(widgetList);
       });
 
@@ -148,7 +148,7 @@
         self.changeActiveNavigation(self, currentWidget)
       });
 
-      $('body').trigger('widgets_initialized');
+      $('body').trigger('widgetsInitialized');
     },
 
     initWidget: function(name) {
@@ -169,7 +169,7 @@
         url: self.configuration.listUrl,
         dataType: 'json'
       }).done(function(data) {
-        $('body').trigger('widgets_loaded', [data]);
+        $('body').trigger('widgetsLoaded', [data]);
       });
     },
 
