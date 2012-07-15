@@ -40,7 +40,7 @@
       var configuration = self.widgetConfiguration(widgetName);
 
       var link = $('<a>').attr('href', '#').text(configuration.linkTitle || configuration.title);
-      var item = $('<li>').data('widget-index', configuration.index).append(link);
+      var item = $('<li>').addClass('nav-item').data('widget-index', configuration.index).append(link);
 
       link.click(function(event) {
         event.preventDefault();
@@ -143,7 +143,7 @@
 
     changeActiveNavigation: function(self, currentWidget) {
       var index = currentWidget.data('widget').index;
-      var item = $('#widget-navigation').find('li').eq(index)
+      var item = $('#widget-navigation').find('.nav-item').eq(index)
 
       self.activateLink(item);
     },
