@@ -177,7 +177,7 @@
       var self = this;
 
       return $.ajax({
-        url: '/widgets/' + filename + '.html'
+        url: '/widgets/' + filename
       });
     },
 

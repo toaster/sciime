@@ -2,21 +2,34 @@ require 'net/https'
 
 class Sciime < Sinatra::Base
 
+  # Register "html" extension to transparently handle plain html templates.
+  Tilt.register Tilt::ERBTemplate, 'html'
+
+  configure do
+    set :widget_dir, "#{settings.views}/widgets"
+  end
+
   get '/' do
     haml :index
   end
 
-  get '/widget-list' do
-    namespaces = Dir['public/widgets/*.html'].map do |file|
-      filename = File.basename(file, '.html')
-
+  get '/widget-list', :provides => :json do
+    widgets = Dir["#{settings.widget_dir}/*"].map do |file|
       {
-        filename: filename,
-        namespace: filename.underscore.camelize
+        filename: File.basename(file),
+        namespace: File.basename(file, '.*').underscore.camelize
       }
     end
 
-    namespaces.to_json
+    widgets.to_json
+  end
+
+  get '/widgets/:name' do |name|
+    begin
+      Tilt.new("#{settings.widget_dir}/#{name}").render
+    rescue Errno::ENOENT
+      404
+    end
   end
 
   get '/proxy/:url' do |url|
