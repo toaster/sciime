@@ -6,7 +6,7 @@ With *sciime* you can easily create a dashboard for your company or personal pro
 
 [example]: https://github.com/sciime/sciime/blob/master/views/widgets/widget-example.haml "Sciime Example Widget"
 
-# How to start the application
+## How to start the application
 
 In production, start the rack application.
 
@@ -17,6 +17,8 @@ In development, use shotgun to reload the application on every request.
     shotgun -p 4567
 
 ## Changelog
+
 ### 2012-07-15
 
 * UI for play-/pause
+* [Tilt](https://github.com/rtomayko/tilt) template support for widgets
