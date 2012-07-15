@@ -1,4 +1,3 @@
-require 'sinatra/reloader' if development?
 require 'net/https'
 
 class Sciime < Sinatra::Base
