@@ -85,7 +85,7 @@
     renderWidget: function(widgetData) {
       var self = this;
 
-      return self.load_widget(widgetData.filename).done(function(content) {
+      return self.loadWidget(widgetData.filename).done(function(content) {
         var item = $('<div>').addClass('item');
         var header = $('<div>').addClass('hero-unit');
         var title = $('<h1>');
@@ -116,22 +116,22 @@
         interval: self.configuration.interval
       });
 
-      var first_widgetData = carousel.find('.item:first').data('widget');
-      self.initWidget(first_widgetData.namespace)
+      var firstWidgetData = carousel.find('.item:first').data('widget');
+      self.initWidget(firstWidgetData.namespace)
 
       carousel.bind('slid', function(event) {
-        var current_widget = $(event.target).find('.active');
-        var next_widget = current_widget.next();
+        var currentWidget = $(event.target).find('.active');
+        var nextWidget = currentWidget.next();
 
-        if (next_widget.length) {
-          var widgetData = next_widget.data('widget');
+        if (nextWidget.length) {
+          var widgetData = nextWidget.data('widget');
         } else {
-          var widgetData = first_widgetData;
+          var widgetData = firstWidgetData;
         }
 
         self.initWidget(widgetData.namespace);
 
-        self.changeActiveNavigation(self, current_widget)
+        self.changeActiveNavigation(self, currentWidget)
       });
 
       $('body').trigger('widgets_initialized');
@@ -141,8 +141,8 @@
       eval(name).init();
     },
 
-    changeActiveNavigation: function(self, current_widget) {
-      var index = current_widget.data('widget').index;
+    changeActiveNavigation: function(self, currentWidget) {
+      var index = currentWidget.data('widget').index;
       var item = $('#widget-navigation').find('li').eq(index)
 
       self.activateLink(item);
@@ -159,7 +159,7 @@
       });
     },
 
-    load_widget: function(filename) {
+    loadWidget: function(filename) {
       var self = this;
 
       return $.ajax({
