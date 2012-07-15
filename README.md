@@ -22,3 +22,4 @@ In development, use shotgun to reload the application on every request.
 
 * UI for play-/pause
 * [Tilt](https://github.com/rtomayko/tilt) template support for widgets
+* added rspec, main application tests and Rakefile to run all tests
