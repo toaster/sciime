@@ -39,7 +39,7 @@
 
       var configuration = self.widgetConfiguration(widgetName);
 
-      var link = $('<a>').attr('href', '#').text(configuration.linkTitle);
+      var link = $('<a>').attr('href', '#').text(configuration.linkTitle || configuration.title);
       var item = $('<li>').data('widget-index', configuration.index).append(link);
 
       link.click(function(event) {
