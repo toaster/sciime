@@ -14,6 +14,8 @@
       });
 
       self.loadWidgetList();
+
+      self.initPlayPauseButton();
     },
 
     addWidgets: function(widgetList) {
@@ -49,6 +51,8 @@
         self.activateLink(parent);
 
         self.carouselPause();
+        $('#widget-navigation .s-icon-play').addClass('clicked');
+
         self.carouselAt(configuration.index);
       });
 
@@ -60,7 +64,17 @@
       element.siblings().removeClass('active');
     },
 
+    carouselPlay: function() {
+      $('#widget-navigation .s-icon-play').show();
+      $('#widget-navigation .s-icon-pause').hide();
+
+      return $('.carousel').carousel();
+    },
+
     carouselPause: function() {
+      $('#widget-navigation .s-icon-play').hide();
+      $('#widget-navigation .s-icon-pause').show();
+
       return $('.carousel').carousel('pause');
     },
 
@@ -164,6 +178,35 @@
 
       return $.ajax({
         url: '/widgets/' + filename + '.html'
+      });
+    },
+
+    initPlayPauseButton:function() {
+      var self = this;
+
+      var playButton = $('#widget-navigation .s-icon-play');
+      var pauseButton = $('#widget-navigation .s-icon-pause');
+      pauseButton.hide();
+
+      $('.carousel-inner').on('hover', function() {
+        if (!playButton.hasClass('clicked')) {
+          playButton.toggle();
+          pauseButton.toggle();
+        }
+      });
+
+      playButton.on('click', function(event) {
+        event.preventDefault();
+
+        self.carouselPause();
+        playButton.toggleClass('clicked');
+      });
+
+      pauseButton.on('click', function(event) {
+        event.preventDefault();
+
+        self.carouselPlay();
+        playButton.toggleClass('clicked');
       });
     },
 

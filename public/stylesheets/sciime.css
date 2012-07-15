@@ -1,3 +1,32 @@
+/* Navigation */
+#widget-navigation i {
+  cursor:pointer;
+  margin-top:12px;
+}
+
+#widget-navigation .s-icon-pause {
+  display:inline-block;
+}
+
 #widget-content .item > div:not(.hero-unit) {
   padding:0 60px;
+}
+
+/* Icons */
+
+[class^="s-icon-"],
+[class*=" s-icon-"] {
+  background-image:url('../images/sciime-icons-white.png');
+  background-repeat:no-repeat;
+  display:inline-block;
+  height:14px;
+  width:14px;
+}
+
+.s-icon-play {
+  background-position:0 0;
+}
+
+.s-icon-pause {
+  background-position:-20px 0;
 }
