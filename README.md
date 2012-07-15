@@ -8,13 +8,25 @@ With *sciime* you can easily create a dashboard for your company or personal pro
 
 ## How to start the application
 
-In production, start the rack application.
+The application is based on [Sinatra](https://github.com/sinatra/sinatra), so you can start the production server, by simply running:
 
+    git clone git@github.com:sciime/sciime.git sciime
+    cd sciime
     rackup -p 4567 -E production
 
-In development, use shotgun to reload the application on every request.
+Two example widgets are provided, but you probably want to add your own widgets to `/views/widgets`.
 
-    shotgun -p 4567
+## Development, Tests and Contribution
+
+It is very easy to contribute to the project. First, fork the project and clone the code, then make sure all tests are passing and then you can make your changes. Please contribute to the main project by creating a feature branch. When you have finished your changes then issue a pull request.
+
+Run all tests:
+
+    bundle exec rake
+
+Start the development server:
+
+    bundle exec shotgun -p 4567
 
 ## Changelog
 
