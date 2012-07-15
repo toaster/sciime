@@ -1,12 +1,12 @@
 (function($) {
 
-  Sciime = {
+  _Sciime = {
     configuration: {
-      interval: 5000,
+      interval: 2000,
       listUrl: '/widget-list'
     },
 
-    init: function() {
+    init: function(self) {
       var self = this;
 
       $('body').bind('widgetsLoaded', function(event, widgetList) {
@@ -219,8 +219,14 @@
     }
   };
 
+  /* Public API */
+  Sciime = {
+    proxy: _Sciime.proxy
+  };
+
+
   $(function() {
-    Sciime.init();
+    _Sciime.init();
   });
 
 })(jQuery);
