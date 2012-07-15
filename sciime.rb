@@ -27,7 +27,7 @@ class Sciime < Sinatra::Base
   get '/widgets/:name' do |name|
     begin
       Tilt.new("#{settings.widget_dir}/#{name}").render
-    rescue Errno::ENOENT
+    rescue RuntimeError
       404
     end
   end
