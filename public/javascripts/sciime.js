@@ -1,6 +1,6 @@
 (function($) {
 
-  Sciime = {
+  _Sciime = {
     configuration: {
       interval: 5000,
       listUrl: '/widget-list'
@@ -219,8 +219,14 @@
     }
   };
 
+  /* Public API */
+  Sciime = {
+    proxy: _Sciime.proxy
+  };
+
+
   $(function() {
-    Sciime.init();
+    _Sciime.init();
   });
 
 })(jQuery);
