@@ -2,11 +2,11 @@
 
   _Sciime = {
     configuration: {
-      interval: 2000,
+      interval: 5000,
       listUrl: '/widget-list'
     },
 
-    init: function(self) {
+    init: function() {
       var self = this;
 
       $('body').bind('widgetsLoaded', function(event, widgetList) {
