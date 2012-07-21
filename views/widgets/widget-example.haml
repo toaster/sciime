@@ -1,0 +1,44 @@
+/
+  Custom styles can be placed in a style tag. Make sure to always use the id of your main div
+  element to limit the styles to their specific widget.
+:css
+  #widget-example {
+    color: green;
+  }
+
+/
+  Each widget should be wrapped in a div element with an unique id across all widgets allow
+  custom styles and custom javascript to only target their own widget. You can place any HTML code
+  in the widget div element.
+#widget-example
+  Hello Widget!
+
+/
+  Include your custom javascript in this separate script tag element. A minimum example is provided
+  below. You also have the following framework library functions available:
+/
+  Sciime.proxy(url, callback) - Returns the content of the url, which does not have to origin from
+  the same host. The callback is then triggered asynchronously (Ajax) and given the content as a
+  string.
+:javascript
+  // Each widget has to define a unique namespace. The namespace holds a configuration section and
+  // an init function. The namespace is the camelized filename.
+  var WidgetExample = {
+
+    configuration: {
+      // The widget title is displayed in the hero unit above the widget.
+      title: 'WidgetExample',
+
+      // The description is displayed in the hero unit, below the title.
+      description: 'This is a minimum example.',
+
+      // The linkTitle is displayed in the navigation bar.
+      linkTitle: 'Example'
+    },
+
+    // The init function is called everytime the widget will slide in next. You can preload any data
+    // your widget needs, so it is instantly accessable when it is displayed.
+    init: function() {
+
+    }
+  }
