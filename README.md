@@ -1,5 +1,8 @@
 # sciime ['ski:m]
 
+[![Build Status](https://secure.travis-ci.org/sciime/sciime.png)](http://travis-ci.org/sciime/sciime)
+
+
 Your favorite dashboard!
 
 With **sciime** you can easily create a dashboard for your company or personal projects that displays your most valuable information. Simply create a new widget and place it in **sciime**s widget folder to extend your dashboard. Widgets can be plain HTML, ERB or HAML files mixed with Javascript. See [widget-example.haml][example] for a starting point.
