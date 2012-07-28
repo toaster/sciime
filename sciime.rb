@@ -1,4 +1,7 @@
+require 'sinatra'
 require 'net/https'
+
+require 'pry'
 
 class Sciime < Sinatra::Base
 
@@ -7,6 +10,8 @@ class Sciime < Sinatra::Base
 
   configure do
     set :widget_dir, "#{settings.views}/widgets"
+    set :server, 'thin'
+    set :run, false
   end
 
   get '/' do
