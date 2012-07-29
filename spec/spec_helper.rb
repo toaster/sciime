@@ -3,7 +3,7 @@ Bundler.require(:default, :development, :test)
 
 require 'rack/test'
 require 'webmock/rspec'
-require_relative 'sciime'
+require_relative '../lib/sciime'
 
 set :environment, :test
 

@@ -1,7 +1,9 @@
 require 'sinatra'
 require 'net/https'
+require 'json'
+require 'active_support/inflector'
 
-require 'pry'
+require 'pry' if development?
 
 class Sciime < Sinatra::Base
 
@@ -9,7 +11,9 @@ class Sciime < Sinatra::Base
   Tilt.register Tilt::ERBTemplate, 'html'
 
   configure do
-    set :widget_dir, "#{settings.views}/widgets"
+    set :views, File.join(root, "../app/views")
+    set :public_folder, File.join(root, "../public")
+    set :widget_dir, File.exists?(File.join(Dir.pwd, 'widgets')) ? File.join(Dir.pwd, 'widgets') : "#{settings.views}/widgets"
     set :server, 'thin'
     set :run, false
   end
