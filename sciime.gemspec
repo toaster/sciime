@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'sciime'
-  s.version     = '0.1.2'
+  s.version     = '0.1.3'
   s.summary     = "Your favorite dashboard!"
   s.description = "With sciime you can easily create a dashboard for your company or personal projects that displays your most valuable information."
   s.authors     = ["Falk Köppe", "Ben Zimmer"]

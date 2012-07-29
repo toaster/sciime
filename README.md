@@ -40,7 +40,7 @@ Run all tests:
 
 Start the development server:
 
-    bundle exec shotgun -p 4567
+    bundle exec shotgun -p 4567 -E development
 
 ## Changelog
 
