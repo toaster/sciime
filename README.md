@@ -24,7 +24,7 @@ Install bundle
 
 Create widget dir
 
-    mkir widgets
+    mkdir widgets
 
 Add widgets to the directory and start sciime
 
