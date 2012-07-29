@@ -4,6 +4,4 @@ require 'thin'
 require_relative "../lib/sciime.rb"
 
 server = ::Thin::Server.new('127.0.0.1', 9999, Sciime)
-server.log_file = 'tmp/thin.log'
-server.pid_file = 'tmp/thin.pid'
 server.start!
