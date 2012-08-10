@@ -42,6 +42,10 @@ Start the development server:
 
     bundle exec shotgun -p 4567 -E development
 
+Put your widgets to:
+
+    /app/views/widgets
+
 ## Changelog
 
 ### 2012-07-29
