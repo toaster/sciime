@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'sciime'
-  s.version     = '0.2.0'
+  s.version     = '0.2.1'
   s.summary     = "Your favorite dashboard!"
   s.description = "With sciime you can easily create a dashboard for your company or personal projects that displays your most valuable information."
   s.authors     = ["Falk Köppe", "Ben Zimmer"]
@@ -22,4 +22,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'shotgun'
   s.add_development_dependency 'webmock'
   s.add_development_dependency 'rspec'
+  s.add_development_dependency 'cucumber'
+  s.add_development_dependency 'aruba'
 end

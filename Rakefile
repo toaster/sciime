@@ -1,5 +1,13 @@
 require 'rspec/core/rake_task'
+require 'cucumber'
+require 'cucumber/rake/task'
 
-RSpec::Core::RakeTask.new(:spec)
+Cucumber::Rake::Task.new(:cucumber)
+RSpec::Core::RakeTask.new(:rspec)
 
-task :default => :spec
+task :all do |t|
+  Rake::Task['rspec'].invoke
+  Rake::Task['cucumber'].invoke
+end
+
+task :default => :all
