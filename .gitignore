@@ -4,4 +4,4 @@
 *.gem
 log/
 tmp/
-views/widgets/
+app/views/widgets/
