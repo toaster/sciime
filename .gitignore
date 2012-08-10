@@ -2,3 +2,6 @@
 .DS_Store
 
 *.gem
+log/
+tmp/
+views/widgets/
