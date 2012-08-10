@@ -1,7 +1,29 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
 require 'thin'
 require_relative "../lib/sciime.rb"
 
-server = ::Thin::Server.new('127.0.0.1', 9999, Sciime)
+options = {
+  :host => '127.0.0.1',
+  :port => 9876,
+}
+
+OptionParser.new do |opts|
+  opts.on('--help', 'Display this screen') do
+    puts opts
+    exit
+  end
+
+  opts.on('-p', '--port PORT', 'Specifiy port to run on') do |port|
+    options[:port] = port
+  end
+
+  opts.on('-h', '--host HOST', 'Specifiy host to run on') do |host|
+    options[:host] = host
+  end
+end.parse!
+
+puts options.inspect
+server = ::Thin::Server.new(options[:host], options[:port], Sciime)
 server.start!
