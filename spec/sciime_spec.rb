@@ -52,6 +52,8 @@ describe 'Sciime' do
   describe 'get /widgets/:name' do
 
     it 'returns template body' do
+      Tilt.stub_chain(:new, :render).and_return('<p>test</p>')
+
       get '/widgets/widget-example.haml'
 
       last_response.should be_ok
