@@ -10,4 +10,4 @@ task :all do |t|
   Rake::Task['cucumber'].invoke
 end
 
-task :default => :all
+task :default => :rspec
