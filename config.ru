@@ -1,5 +1,5 @@
 require 'bundler/setup'
 Bundler.require(:default, ENV['RACK_ENV'])
 
-require './sciime'
+require './lib/sciime'
 run Sciime

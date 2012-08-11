@@ -1,2 +1,7 @@
 .bundle
 .DS_Store
+
+*.gem
+log/
+tmp/
+app/views/widgets/

@@ -9,15 +9,29 @@ With **sciime** you can easily create a dashboard for your company or personal p
 
 [example]: https://github.com/sciime/sciime/blob/master/views/examples/widget-example.haml "Sciime Example Widget"
 
-## How to start the application
+## Making your own dashboard
 
-The application is based on [Sinatra](https://github.com/sinatra/sinatra), so you can start the production server, by simply running:
+Create directory
 
-    git clone git@github.com:sciime/sciime.git sciime
-    cd sciime
-    rackup -p 4567 -E production
+    mkdir my-dashboard
+    cd my-dashboard
 
-Two example widgets are provided. In order to activate the examples, copy them into the `/views/widgets` folder. If you want to add your own widgets, just put them there as well.
+Create gemfile with the following contents
+
+    source :rubygems
+    gem 'sciime', '0.1.2'
+
+Install bundle
+
+    bundle install
+
+Create widget dir
+
+    mkdir widgets
+
+Add widgets to the directory and start sciime
+
+    sciime
 
 ## Development, Tests and Contribution
 
@@ -29,9 +43,17 @@ Run all tests:
 
 Start the development server:
 
-    bundle exec shotgun -p 4567
+    bundle exec shotgun -p 4567 -E development
+
+Put your widgets to:
+
+    /app/views/widgets
 
 ## Changelog
+
+### 2012-07-29
+
+* Make sciime usable as a gem
 
 ### 2012-07-17
 

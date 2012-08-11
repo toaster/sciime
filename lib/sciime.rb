@@ -1,4 +1,7 @@
+require 'sinatra'
 require 'net/https'
+require 'json'
+require 'active_support/inflector'
 
 class Sciime < Sinatra::Base
 
@@ -6,8 +9,16 @@ class Sciime < Sinatra::Base
   Tilt.register Tilt::ERBTemplate, 'html'
 
   configure do
-    set :widget_dir, "#{settings.views}/widgets"
+    set :views, File.join(root, "../app/views")
+    set :public_folder, File.join(root, "../public")
+    set :widget_dir, File.exists?(File.join(Dir.pwd, 'widgets')) ? File.join(Dir.pwd, 'widgets') : "#{settings.views}/widgets"
+    set :server, 'thin'
+    set :run, false
+    set :environment, (ENV['RACK_ENV'] || :production).to_sym
   end
+
+  # have to wait for environment to be set before loading this
+  require 'pry' if development?
 
   get '/' do
     haml :index
