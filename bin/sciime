@@ -24,6 +24,9 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-puts options.inspect
-server = ::Thin::Server.new(options[:host], options[:port], Sciime)
-server.start!
+if File.directory?('widgets')
+  server = ::Thin::Server.new(options[:host], options[:port], Sciime)
+  server.start!
+else
+  puts 'Please create a directory called "widgets"'
+end
