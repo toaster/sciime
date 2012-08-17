@@ -31,7 +31,15 @@ Create widget dir
 
 Add widgets to the directory and start sciime
 
-    sciime
+    sciime start
+
+You can start sciime as a background process with
+
+    sciime start -d
+
+To stop it again use
+
+    sciime stop
 
 ## Development, Tests and Contribution
 

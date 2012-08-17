@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name        = 'sciime'
-  s.version     = '0.2.2'
-  s.summary     = "Your favorite dashboard!"
-  s.description = "With sciime you can easily create a dashboard for your company or personal projects that displays your most valuable information."
-  s.authors     = ["Falk Köppe", "Ben Zimmer"]
+  s.version     = '0.3.0'
+  s.summary     = 'Your favorite dashboard!'
+  s.description = 'With sciime you can easily create a dashboard for your company or personal projects that displays your most valuable information.'
+  s.authors     = ['Falk Köppe', 'Ben Zimmer']
   s.email       = 'hello@scii.me'
-  s.files       = Dir.glob("{app,bin,lib,public}/**/*") + %w(LICENSE README.md)
-  s.test_files  = Dir.glob("{spec}/**/*")
+  s.files       = Dir.glob('{app,bin,lib,public}/**/*') + %w(LICENSE README.md)
+  s.test_files  = Dir.glob('{spec}/**/*')
   s.executables = ['sciime']
   s.homepage    = 'http://scii.me'
 

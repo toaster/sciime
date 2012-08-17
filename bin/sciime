@@ -22,11 +22,44 @@ OptionParser.new do |opts|
   opts.on('-h', '--host HOST', 'Specifiy host to run on') do |host|
     options[:host] = host
   end
+
+  opts.on('-d', '--daemonize', 'Run sciime as a background process') do
+    options[:daemonize] = true
+  end
+
+  opts.on('-i', '--pid PIDFILE', 'Specifiy pidfile (only works with -d)') do |pidfile|
+    options[:pidfile] = pidfile
+  end
+
+  opts.on('-l', '--log LOGFILE', 'Specifiy logfile (only works with -d)') do |logfile|
+    options[:logfile] = logfile
+  end
 end.parse!
 
-if File.directory?('widgets')
-  server = ::Thin::Server.new(options[:host], options[:port], Sciime)
-  server.start!
+PID_FILE = options[:pidfile] || '/tmp/sciime.pid'
+LOG_FILE = options[:logfile] || '/tmp/sciime.log'
+
+if ARGV[0] == 'start'
+  if File.directory?('widgets')
+    server = ::Thin::Server.new(options[:host], options[:port], Sciime)
+    if options[:daemonize]
+      server.pid_file = PID_FILE
+      server.log_file = LOG_FILE
+      server.daemonize
+    end
+    server.start!
+  else
+    puts 'Please create a directory called "widgets". Thanks!'
+  end
+elsif ARGV[0] == 'stop'
+  if File.exists?(PID_FILE)
+    `thin --pid #{PID_FILE} stop`
+    FileUtils.remove(LOG_FILE)
+  else
+    puts 'Please specifiy a pidfile with -i (consult help with --help)'
+  end
+
+  exit
 else
-  puts 'Please create a directory called "widgets"'
+  puts 'Please use [start|stop] as your first argument. Thanks!'
 end
