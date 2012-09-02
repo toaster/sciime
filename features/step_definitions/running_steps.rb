@@ -5,4 +5,5 @@ World(Aruba::Api)
 
 When /^I run "([^"]*)"$/ do |cmd|
   run_interactive(unescape(cmd))
+  terminate_processes!
 end
