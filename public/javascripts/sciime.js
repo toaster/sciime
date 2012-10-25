@@ -130,20 +130,14 @@
         interval: self.configuration.interval
       });
 
-      var firstWidgetData = carousel.find('.item:first').data('widget');
-      self.initWidget(firstWidgetData.namespace)
+      var firstWidget = carousel.find('.item:first');
+      self.initWidget(firstWidget)
 
       carousel.bind('slid', function(event) {
         var currentWidget = $(event.target).find('.active');
         var nextWidget = currentWidget.next();
 
-        if (nextWidget.length) {
-          var widgetData = nextWidget.data('widget');
-        } else {
-          var widgetData = firstWidgetData;
-        }
-
-        self.initWidget(widgetData.namespace);
+        self.initWidget(nextWidget.length ? nextWidget : firstWidget);
 
         self.changeActiveNavigation(self, currentWidget)
       });
@@ -151,8 +145,8 @@
       $('body').trigger('widgetsInitialized');
     },
 
-    initWidget: function(name) {
-      eval(name).init();
+    initWidget: function(widget) {
+      eval(widget.data('widget').namespace).init();
     },
 
     changeActiveNavigation: function(self, currentWidget) {
