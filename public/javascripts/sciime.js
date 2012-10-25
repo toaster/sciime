@@ -137,6 +137,7 @@
         var currentWidget = $(event.target).find('.active');
         var nextWidget = currentWidget.next();
 
+        self.afterActivateWidget(currentWidget);
         self.initWidget(nextWidget.length ? nextWidget : firstWidget);
 
         self.changeActiveNavigation(self, currentWidget)
@@ -147,6 +148,15 @@
 
     initWidget: function(widget) {
       eval(widget.data('widget').namespace).init();
+    },
+
+    afterActivateWidget: function(widget) {
+      if (typeof widget.data('iframes_loaded') === "undefined") {
+        widget.find('iframe').each(function() {
+          this.src = this.src;
+        });
+        widget.data('iframes_loaded', true);
+      }
     },
 
     changeActiveNavigation: function(self, currentWidget) {
