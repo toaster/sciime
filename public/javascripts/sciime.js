@@ -148,6 +148,13 @@
 
     initWidget: function(widget) {
       eval(widget.data('widget').namespace).init();
+
+      widget.find('img.refresh').each(function() {
+        if (typeof $(this).data('src') === "undefined") {
+          $(this).data('src', this.src);
+        }
+        this.src = $(this).data('src') + "?timestamp=" + new Date().getTime();
+      });
     },
 
     afterActivateWidget: function(widget) {
