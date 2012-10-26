@@ -2,7 +2,7 @@
 
   _Sciime = {
     configuration: {
-      interval: 5000,
+      interval: 10000,
       listUrl: '/widget-list'
     },
 
