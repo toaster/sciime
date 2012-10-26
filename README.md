@@ -19,7 +19,7 @@ Create directory
 Create gemfile with the following contents
 
     source :rubygems
-    gem 'sciime', '0.1.2'
+    gem 'sciime'
 
 Install bundle
 
@@ -58,6 +58,12 @@ Put your widgets to:
     /app/views/widgets
 
 ## Changelog
+
+### 2012-10-26
+
+* iframe support
+* CSS class 'refresh' for automatic image refresh
+* default slide interval 10s
 
 ### 2012-07-29
 

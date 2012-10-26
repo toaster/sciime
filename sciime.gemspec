@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'sciime'
-  s.version     = '0.3.0'
+  s.version     = '0.4.0'
   s.summary     = 'Your favorite dashboard!'
   s.description = 'With sciime you can easily create a dashboard for your company or personal projects that displays your most valuable information.'
-  s.authors     = ['Falk Köppe', 'Ben Zimmer']
+  s.authors     = ['Falk Köppe', 'Ben Zimmer', 'Tilo Prütz']
   s.email       = 'hello@scii.me'
   s.files       = Dir.glob('{app,bin,lib,public}/**/*') + %w(LICENSE README.md)
   s.test_files  = Dir.glob('{spec}/**/*')
